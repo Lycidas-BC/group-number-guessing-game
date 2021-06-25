@@ -4,7 +4,7 @@ const app = express();
 const PORT = 5000;
 
 // This must be added before GET & POST routes.
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}));
 app.use( express.json() );
 
 // Serve up static files (HTML, CSS, Client JS)
@@ -16,7 +16,8 @@ app.post('/inputs', (req, res) => {
 
   // generate random number
   let generatedRandomNumber = randomNumber();
-  
+  console.log(generatedRandomNumber);
+
   // compare inputs to random number
   // req.body: contains array of input objects; filter out only the ones that match generatedRandomNumber
   //Object.values(req.body.inputArray).filter(element => Number(element) === generatedRandomNumber);
@@ -70,7 +71,7 @@ let person4Guesses = [];
         entry.round = roundNumber;
         entry.playerNumber = 1; // call ID from input box to name player number
         entry.guessedNumber = guess;
-        entry.generatedNumber = generatedNumber;
+        entry.generatedNumber = generatedRandomNumber;
         entry.result = guessRange;
         console.log(entry);
     }
