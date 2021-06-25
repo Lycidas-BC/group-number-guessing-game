@@ -38,41 +38,48 @@ function randomNumber() {
 
 let roundNumber = 0;
 
-guesses = [3, 17, 24, 11];
-
-let person1Guesses = [];
-let person2Guesses = [];
-let person3Guesses = [];
-let person4Guesses = [];
-
-// guess = number imputed from client
-// guesses = array of numbers
-
-
-    function checkAnswers(guesses, generatedRandomNumber) {
-      roundNumber++;
-    for (guess of guesses) { // looping guess value
-      let personNumber = 0;
-      personNumber++;
-      guessRange = "";
-      if (guess === generatedRandomNumber) { // check if guess equals random number
-        alert("Congratulations! You guessed the exact number!");
-        guessRange = "Exact";
-      } 
-      else if (guess < generatedRandomNumber) { // check if guess is lower
-        console.log("You guessed too low!");
-        guessRange = "Too Low";
-      }
-      else if (guess > generatedRandomNumber) { // check if guess is higher
-        console.log("You guessed too high!");
-        guessRange = "Too High";
-      }
-      let entry = {}; // object to store personal round results
-        entry.round = roundNumber;
-        entry.playerNumber = 1; // call ID from input box to name player number
-        entry.guessedNumber = guess;
-        entry.generatedNumber = generatedRandomNumber;
-        entry.result = guessRange;
-        console.log(entry);
+function checkAnswers() { // main function logic. takes inputs from client, returns  
+  roundNumber++;
+  let personNumber = 0;
+for (guess of guesses) { // looping guess value
+  personNumber++;
+  guessRange = "";
+  if (guess === generatedRandomNumber) { // check if guess equals random number
+    alert("Congratulations! You guessed the exact number!");
+    guessRange = "Exact";
+  } 
+  else if (guess < generatedRandomNumber) { // check if guess is lower
+    console.log("You guessed too low!");
+    guessRange = "Too Low";
+  }
+  else if (guess > generatedRandomNumber) { // check if guess is higher
+    console.log("You guessed too high!");
+    guessRange = "Too High";
+  }
+  let entry = {}; // object to store personal round results
+    entry.round = roundNumber;
+    entry.playerNumber = personNumber; // call ID from input box to name player number
+    entry.guessedNumber = guess;
+    entry.generatedNumber = generatedRandomNumber;
+    entry.result = guessRange;
+    console.log(entry);
+    switch (personNumber) { // statement to check for which player number an entry comes from and push it to their game data array storage
+      case 1:
+        person1Guesses.push(entry);
+        break;
+      case 2:
+        person2Guesses.push(entry);
+        break;
+      case 3:
+        person3Guesses.push(entry);
+        break;
+      case 4:
+        person4Guesses.push(entry);
+        break;
+    
+      default: console.log('error');
+        break;
     }
-    }
+}
+return true;
+}
