@@ -13,10 +13,10 @@ function handleReady() {
  */
 function submitGuesses() {
   //get input values
-  let input1 = $('#input1').val();
-  let input2 = $('#input2').val();
-  let input3 = $('#input3').val();
-  let input4 = $('#input4').val();
+  let input1 = Number($('#input1').val());
+  let input2 = Number($('#input2').val());
+  let input3 = Number($('#input3').val());
+  let input4 = Number($('#input4').val());
 
   //send to server
   $.ajax({
@@ -24,10 +24,7 @@ function submitGuesses() {
     method: 'POST',
     url: '/inputs',
     data: {inputArray:
-        [{input1: input1},
-        {input2: input2},
-        {input3: input3},
-        {input4: input4}]
+        [input1, input2, input3, input4]
     } //data becomes req.body on server
 })
 .then( function(response) {
