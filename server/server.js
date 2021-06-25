@@ -10,18 +10,18 @@ app.use( express.json() );
 // Serve up static files (HTML, CSS, Client JS)
 app.use(express.static('server/public'));
 
+  // generate random number global
+  let generatedRandomNumber = randomNumber();
+
 // GET & POST Routes go here
 app.post('/inputs', (req, res) => {
   console.log('in post for inputs', req.body);
 
-  // generate random number
-  let generatedRandomNumber = randomNumber();
-  console.log(generatedRandomNumber);
 
   // compare inputs to random number
   // req.body: contains array of input objects; filter out only the ones that match generatedRandomNumber
   //Object.values(req.body.inputArray).filter(element => Number(element) === generatedRandomNumber);
-  checkAnswers(req.body.inputArray, generatedRandomNumber);
+  checkAnswers(req.body.inputArray);
   
   // always respond
   res.sendStatus(201); // 201 is good!
@@ -43,7 +43,7 @@ let person2Guesses = [];
 let person3Guesses = [];
 let person4Guesses = [];
 
-function checkAnswers(guesses, generatedRandomNumber) { // main function logic. takes inputs from client, returns  
+function checkAnswers(guesses) { // main function logic. takes inputs from client, returns  
   roundNumber++;
   let personNumber = 0;
 for (guess of guesses) { // looping guess value
@@ -85,6 +85,6 @@ for (guess of guesses) { // looping guess value
       default: console.log('error');
         break;
     }
-}
+} 
 return true;
 }
