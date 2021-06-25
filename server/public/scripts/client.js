@@ -6,7 +6,7 @@ function handleReady() {
   $('#submit').on('click', submitGuesses);
 
   // when user clicks [], run function
-  //$('#Restart').on('click', restartGame);
+  $('#Restart').on('click', restartGame);
 }
 /**
  * 
@@ -34,5 +34,28 @@ function submitGuesses() {
 .catch( function(err) {
     //server.js returned error case
     console.log('failed to post', err);
+})
+}
+
+function restartGame() {
+  //get input values
+  $('#input1').empty();
+  $('#input2').empty();
+  $('#input3').empty();
+  $('#input4').empty();
+
+  //send to server
+  $.ajax({
+    //type
+    method: 'POST',
+    url: '/reset'//data becomes req.body on server
+})
+.then( function(response) {
+    // successful send case
+    console.log('reset successful', response);
+})
+.catch( function(err) {
+    //server.js returned error case
+    console.log('reset failed', err);
 })
 }
