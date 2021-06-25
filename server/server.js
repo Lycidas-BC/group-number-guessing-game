@@ -21,7 +21,8 @@ app.post('/inputs', (req, res) => {
   // compare inputs to random number
   // req.body: contains array of input objects; filter out only the ones that match generatedRandomNumber
   //Object.values(req.body.inputArray).filter(element => Number(element) === generatedRandomNumber);
-  checkAnswers(Object.values(req.body.inputArray), generatedRandomNumber);
+  checkAnswers(req.body.inputArray, generatedRandomNumber);
+  
   // always respond
   res.sendStatus(201); // 201 is good!
 });
@@ -37,22 +38,26 @@ function randomNumber() {
 
 
 let roundNumber = 0;
+let person1Guesses = [];
+let person2Guesses = [];
+let person3Guesses = [];
+let person4Guesses = [];
 
-function checkAnswers() { // main function logic. takes inputs from client, returns  
+function checkAnswers(guesses, generatedRandomNumber) { // main function logic. takes inputs from client, returns  
   roundNumber++;
   let personNumber = 0;
 for (guess of guesses) { // looping guess value
   personNumber++;
   guessRange = "";
-  if (guess === generatedRandomNumber) { // check if guess equals random number
-    alert("Congratulations! You guessed the exact number!");
+  if (Number(guess) === generatedRandomNumber) { // check if guess equals random number
+    console.log("Congratulations! You guessed the exact number!");
     guessRange = "Exact";
   } 
-  else if (guess < generatedRandomNumber) { // check if guess is lower
+  else if (Number(guess) < generatedRandomNumber) { // check if guess is lower
     console.log("You guessed too low!");
     guessRange = "Too Low";
   }
-  else if (guess > generatedRandomNumber) { // check if guess is higher
+  else if (Number(guess) > generatedRandomNumber) { // check if guess is higher
     console.log("You guessed too high!");
     guessRange = "Too High";
   }
