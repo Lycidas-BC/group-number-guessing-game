@@ -27,6 +27,19 @@ app.post('/inputs', (req, res) => {
   res.sendStatus(201); // 201 is good!
 });
 
+app.post('/reset', (req, res) => {
+  //reset globals
+  generatedRandomNumber = randomNumber();
+  roundNumber = 0;
+  person1Guesses = [];
+  person2Guesses = [];
+  person3Guesses = [];
+  person4Guesses = [];
+  
+  // always respond
+  res.sendStatus(201); // 201 is good!
+});
+
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
 })
